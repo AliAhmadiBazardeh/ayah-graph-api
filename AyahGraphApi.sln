@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AyahGraphApi", "AyahGraphApi\AyahGraphApi.csproj", "{BFBBC701-9D3C-43F2-A872-81C83271FF8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AyahGraphApi.Domain", "AyahGraphApi.Domain\AyahGraphApi.Domain.csproj", "{4FF3E199-B9AC-470A-B6EB-44C6B99B306A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{BFBBC701-9D3C-43F2-A872-81C83271FF8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFBBC701-9D3C-43F2-A872-81C83271FF8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFBBC701-9D3C-43F2-A872-81C83271FF8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FF3E199-B9AC-470A-B6EB-44C6B99B306A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FF3E199-B9AC-470A-B6EB-44C6B99B306A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FF3E199-B9AC-470A-B6EB-44C6B99B306A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FF3E199-B9AC-470A-B6EB-44C6B99B306A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
