@@ -1,0 +1,57 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# JetBrains Rider / IntelliJ IDEA
+.idea/
+*.sln.iml
+*.iml
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+
+# NuGet
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+
+# Logs
+*.log
+
+# ASP.NET Core
+appsettings.Development.json
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test results
+TestResults/
+*.trx
+
+# Coverage
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+
+# Temporary files
+*.tmp
+*.temp
