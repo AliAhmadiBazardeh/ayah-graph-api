@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AyahGraphApi", "AyahGraphAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AyahGraphApi.Domain", "AyahGraphApi.Domain\AyahGraphApi.Domain.csproj", "{4FF3E199-B9AC-470A-B6EB-44C6B99B306A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AyahGraphApi.Application", "AyahGraphApi.Application\AyahGraphApi.Application.csproj", "{91E20687-0B03-4A07-979F-FE9589985A65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{4FF3E199-B9AC-470A-B6EB-44C6B99B306A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FF3E199-B9AC-470A-B6EB-44C6B99B306A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FF3E199-B9AC-470A-B6EB-44C6B99B306A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91E20687-0B03-4A07-979F-FE9589985A65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91E20687-0B03-4A07-979F-FE9589985A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91E20687-0B03-4A07-979F-FE9589985A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91E20687-0B03-4A07-979F-FE9589985A65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
