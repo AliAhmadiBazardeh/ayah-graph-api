@@ -4,7 +4,7 @@ using AyahGraphApi.Domain.Repositories;
 
 namespace AyahGraphApi.Application.Services;
 
-public sealed class VerseRelationService
+public sealed class VerseRelationService : IVerseRelationService
 {
     private readonly IVerseRelationRepository _repository;
 
