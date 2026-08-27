@@ -89,4 +89,68 @@ public class VerseRelationServiceTests
         // Assert
         Assert.Equal(2, result.Count);
     }
+    
+    [Fact]
+    public async Task UpdateAsync_Should_UpdateRelation()
+    {
+        // Arrange
+        var repository = new FakeVerseRelationRepository();
+        var service = new VerseRelationService(repository);
+
+        var createdRelation = await service.CreateAsync(
+            new CreateVerseRelationRequest(
+                1,
+                2,
+                RelationType.Semantic));
+
+        var request = new UpdateVerseRelationRequest(
+            3,
+            4,
+            RelationType.Conceptual);
+
+        // Act
+        var result = await service.UpdateAsync(
+            createdRelation.Id,
+            request);
+
+        // Assert
+        Assert.Equal(
+            createdRelation.Id,
+            result.Id);
+
+        Assert.Equal(
+            3,
+            result.SourceVerseId);
+
+        Assert.Equal(
+            4,
+            result.TargetVerseId);
+
+        Assert.Equal(
+            RelationType.Conceptual,
+            result.Type);
+    }
+    
+    [Fact]
+    public async Task DeleteAsync_Should_DeleteRelation()
+    {
+        // Arrange
+        var repository = new FakeVerseRelationRepository();
+        var service = new VerseRelationService(repository);
+
+        var createdRelation = await service.CreateAsync(
+            new CreateVerseRelationRequest(
+                1,
+                2,
+                RelationType.Semantic));
+
+        // Act
+        await service.DeleteAsync(createdRelation.Id);
+
+        var result = await service.GetByIdAsync(
+            createdRelation.Id);
+
+        // Assert
+        Assert.Null(result);
+    }
 }
