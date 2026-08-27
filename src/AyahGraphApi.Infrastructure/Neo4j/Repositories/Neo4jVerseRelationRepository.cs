@@ -80,29 +80,10 @@ public sealed class Neo4jVerseRelationRepository : IVerseRelationRepository
                 var records = await cursor.ToListAsync();
 
                 var record = records.FirstOrDefault();
-                
-                if (record is null)
-                {
-                    return null;
-                }
 
-                var sourceVerseId =
-                    record["sourceVerseId"].As<int>();
-
-                var targetVerseId =
-                    record["targetVerseId"].As<int>();
-
-                var relationId =
-                    Guid.Parse(record["relationId"].As<string>());
-
-                var relationType = ParseRelationshipType(
-                    record["relationType"].As<string>());
-
-                return new VerseRelation(
-                    relationId,
-                    sourceVerseId,
-                    targetVerseId,
-                    relationType);
+                return record is null
+                    ? null
+                    : MapToVerseRelation(record);
             });
     }
 
@@ -129,26 +110,7 @@ public sealed class Neo4jVerseRelationRepository : IVerseRelationRepository
                 var records = await cursor.ToListAsync();
 
                 return records
-                    .Select(record =>
-                    {
-                        var sourceVerseId =
-                            record["sourceVerseId"].As<int>();
-
-                        var targetVerseId =
-                            record["targetVerseId"].As<int>();
-
-                        var relationId =
-                            Guid.Parse(record["relationId"].As<string>());
-
-                        var relationType = ParseRelationshipType(
-                            record["relationType"].As<string>());
-
-                        return new VerseRelation(
-                            relationId,
-                            sourceVerseId,
-                            targetVerseId,
-                            relationType);
-                    })
+                    .Select(MapToVerseRelation)
                     .ToList();
             });
     }
@@ -232,5 +194,26 @@ public sealed class Neo4jVerseRelationRepository : IVerseRelationRepository
             _ => throw new InvalidOperationException(
                 $"Unknown relationship type: {relationshipType}")
         };
+    }
+    
+    private static VerseRelation MapToVerseRelation(IRecord record)
+    {
+        var sourceVerseId =
+            record["sourceVerseId"].As<int>();
+
+        var targetVerseId =
+            record["targetVerseId"].As<int>();
+
+        var relationId =
+            Guid.Parse(record["relationId"].As<string>());
+
+        var relationType = ParseRelationshipType(
+            record["relationType"].As<string>());
+
+        return new VerseRelation(
+            relationId,
+            sourceVerseId,
+            targetVerseId,
+            relationType);
     }
 }
