@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AyahGraphApi.Domain", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AyahGraphApi.Infrastructure", "src\AyahGraphApi.Infrastructure\AyahGraphApi.Infrastructure.csproj", "{A1A441ED-947C-47AB-B9B6-F7D1842FFC51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AyahGraphApi.Domain.Tests", "tests\AyahGraphApi.Domain.Tests\AyahGraphApi.Domain.Tests.csproj", "{D388F717-4A78-4FA6-A1E8-C679AF8838EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AyahGraphApi.Domain.Tests", "tests\AyahGraphApi.Domain.Tests\AyahGraphApi.Domain.Tests.csproj", "{8075BC09-A57C-419E-92EB-B8822AA6B6A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,9 +32,9 @@ Global
 		{A1A441ED-947C-47AB-B9B6-F7D1842FFC51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1A441ED-947C-47AB-B9B6-F7D1842FFC51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1A441ED-947C-47AB-B9B6-F7D1842FFC51}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D388F717-4A78-4FA6-A1E8-C679AF8838EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D388F717-4A78-4FA6-A1E8-C679AF8838EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D388F717-4A78-4FA6-A1E8-C679AF8838EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D388F717-4A78-4FA6-A1E8-C679AF8838EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8075BC09-A57C-419E-92EB-B8822AA6B6A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8075BC09-A57C-419E-92EB-B8822AA6B6A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8075BC09-A57C-419E-92EB-B8822AA6B6A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8075BC09-A57C-419E-92EB-B8822AA6B6A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
