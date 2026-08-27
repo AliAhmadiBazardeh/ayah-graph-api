@@ -54,6 +54,33 @@ public sealed class VerseRelationService : IVerseRelationService
             .ToList();
     }
 
+    public async Task<VerseRelationResponse> UpdateAsync(
+        Guid id,
+        UpdateVerseRelationRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        var relation = new VerseRelation(
+            id,
+            request.SourceVerseId,
+            request.TargetVerseId,
+            request.Type);
+
+        await _repository.UpdateAsync(
+            relation,
+            cancellationToken);
+
+        return MapToResponse(relation);
+    }
+
+    public async Task DeleteAsync(
+        Guid id,
+        CancellationToken cancellationToken = default)
+    {
+        await _repository.DeleteAsync(
+            id,
+            cancellationToken);
+    }
+
     private static VerseRelationResponse MapToResponse(
         VerseRelation relation)
     {

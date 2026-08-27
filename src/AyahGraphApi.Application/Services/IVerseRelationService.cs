@@ -14,4 +14,14 @@ public interface IVerseRelationService
 
     Task<IReadOnlyList<VerseRelationResponse>> GetAllAsync(
         CancellationToken cancellationToken = default);
+    
+    
+    Task<VerseRelationResponse> UpdateAsync(
+        Guid id,
+        UpdateVerseRelationRequest request,
+        CancellationToken cancellationToken = default);
+
+    Task DeleteAsync(
+        Guid id,
+        CancellationToken cancellationToken = default);
 }
