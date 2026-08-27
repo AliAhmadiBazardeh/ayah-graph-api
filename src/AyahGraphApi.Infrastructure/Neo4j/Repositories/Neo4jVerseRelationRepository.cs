@@ -1,6 +1,7 @@
 using AyahGraphApi.Infrastructure.Neo4j.Configuration;
 using AyahGraphApi.Domain.Entities;
 using AyahGraphApi.Domain.Enums;
+using AyahGraphApi.Domain.Exceptions;
 using AyahGraphApi.Domain.Repositories;
 using Neo4j.Driver;
 
@@ -28,11 +29,11 @@ public sealed class Neo4jVerseRelationRepository : IVerseRelationRepository
         await using var session = _driver.AsyncSession(
             options => options.WithDatabase(_database));
 
-        var query = $$$"""
-                       MERGE (source:Verse {{id: $sourceVerseId}})
-                       MERGE (target:Verse {{id: $targetVerseId}})
-                       CREATE (source)-[r:{relationshipType} {{id: $relationId}}]->(target)
-                       """;
+        var query = $@"
+                    MERGE (source:Ayah {{id: $sourceVerseId}})
+                    MERGE (target:Ayah {{id: $targetVerseId}})
+                    CREATE (source)-[r:{relationshipType} {{id: $relationId}}]->(target)
+                    ";
 
         await session.ExecuteWriteAsync(
             async tx =>
@@ -58,7 +59,7 @@ public sealed class Neo4jVerseRelationRepository : IVerseRelationRepository
             options => options.WithDatabase(_database));
 
         const string query = """
-                             MATCH (source:Verse)-[r]->(target:Verse)
+                             MATCH (source:Ayah)-[r]->(target:Ayah)
                              WHERE r.id = $relationId
                              RETURN
                                  source.id AS sourceVerseId,
@@ -94,7 +95,7 @@ public sealed class Neo4jVerseRelationRepository : IVerseRelationRepository
             options => options.WithDatabase(_database));
 
         const string query = """
-                             MATCH (source:Verse)-[r]->(target:Verse)
+                             MATCH (source:Ayah)-[r]->(target:Ayah)
                              RETURN
                                  source.id AS sourceVerseId,
                                  target.id AS targetVerseId,
@@ -124,19 +125,23 @@ public sealed class Neo4jVerseRelationRepository : IVerseRelationRepository
         await using var session = _driver.AsyncSession(
             options => options.WithDatabase(_database));
 
-        var query = $$$"""
-                     MATCH ()-[oldRelation {{id: $relationId}}]->()
-                     DELETE oldRelation
+        var query = $@"
+        MATCH (oldSource:Ayah)-[oldRelation:SEMANTIC|CONCEPTUAL]->(oldTarget:Ayah)
+        WHERE oldRelation.id = $relationId
 
-                     MERGE (source:Verse {{id: $sourceVerseId}})
-                     MERGE (target:Verse {{id: $targetVerseId}})
-                     CREATE (source)-[newRelation:{relationshipType} {{id: $relationId}}]->(target)
-                     """;
+        DELETE oldRelation
+
+        MERGE (source:Ayah {{id: $sourceVerseId}})
+        MERGE (target:Ayah {{id: $targetVerseId}})
+
+        CREATE (source)-[r:{relationshipType} {{id: $relationId}}]->(target)
+        RETURN r.id AS relationId
+        ";
 
         await session.ExecuteWriteAsync(
             async tx =>
             {
-                await tx.RunAsync(
+                var cursor = await tx.RunAsync(
                     query,
                     new
                     {
@@ -144,6 +149,14 @@ public sealed class Neo4jVerseRelationRepository : IVerseRelationRepository
                         sourceVerseId = relation.SourceVerseId,
                         targetVerseId = relation.TargetVerseId
                     });
+
+                var records = await cursor.ToListAsync();
+
+                if (records.Count == 0)
+                {
+                    throw new VerseRelationNotFoundException(
+                        relation.Id);
+                }
 
                 return true;
             });
@@ -157,19 +170,28 @@ public sealed class Neo4jVerseRelationRepository : IVerseRelationRepository
             options => options.WithDatabase(_database));
 
         const string query = """
-                             MATCH ()-[r {id: $relationId}]->()
+                             MATCH ()-[r:SEMANTIC|CONCEPTUAL]->()
+                             WHERE r.id = $relationId
                              DELETE r
+                             RETURN $relationId AS relationId
                              """;
 
         await session.ExecuteWriteAsync(
             async tx =>
             {
-                await tx.RunAsync(
+                var cursor = await tx.RunAsync(
                     query,
                     new
                     {
                         relationId = id.ToString()
                     });
+
+                var records = await cursor.ToListAsync();
+
+                if (records.Count == 0)
+                {
+                    throw new VerseRelationNotFoundException(id);
+                }
 
                 return true;
             });
