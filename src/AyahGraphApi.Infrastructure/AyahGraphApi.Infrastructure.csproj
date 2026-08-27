@@ -7,16 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\AyahGraphApi.Application\AyahGraphApi.Application.csproj" />
       <ProjectReference Include="..\AyahGraphApi.Domain\AyahGraphApi.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Neo4j.Driver" Version="6.3.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Neo4j\Configuration\" />
     </ItemGroup>
 
 </Project>
