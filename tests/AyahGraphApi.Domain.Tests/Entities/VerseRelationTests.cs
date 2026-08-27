@@ -97,4 +97,44 @@ public class VerseRelationTests
         // Assert
         Assert.Throws<ArgumentOutOfRangeException>(action);
     }
+    
+    [Fact]
+    public void Update_Should_UpdateRelation_When_InputIsValid()
+    {
+        // Arrange
+        var relation = new VerseRelation(
+            Guid.NewGuid(),
+            1,
+            2,
+            RelationType.Semantic);
+
+        // Act
+        relation.Update(
+            3,
+            4,
+            RelationType.Conceptual);
+
+        // Assert
+        Assert.Equal(3, relation.SourceVerseId);
+        Assert.Equal(4, relation.TargetVerseId);
+        Assert.Equal(RelationType.Conceptual, relation.Type);
+    }
+    
+    [Fact]
+    public void Update_Should_ThrowException_When_SourceAndTargetAreSame()
+    {
+        // Arrange
+        var relation = new VerseRelation(
+            Guid.NewGuid(),
+            1,
+            2,
+            RelationType.Semantic);
+
+        // Act & Assert
+        Assert.Throws<InvalidOperationException>(() =>
+            relation.Update(
+                3,
+                3,
+                RelationType.Semantic));
+    }
 }

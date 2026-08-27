@@ -57,5 +57,22 @@ public sealed class VerseRelation
         TargetVerseId = targetVerseId;
         Type = type;
         
+        
     }
+    
+    public void Update(
+        int sourceVerseId,
+        int targetVerseId,
+        RelationType type)
+    {
+        if (sourceVerseId == targetVerseId)
+        {
+            throw new InvalidOperationException(
+                "Source and target verses cannot be the same.");
+        }
+
+        SourceVerseId = sourceVerseId;
+        TargetVerseId = targetVerseId;
+        Type = type;
+    }  
 }
